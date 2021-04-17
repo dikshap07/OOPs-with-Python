@@ -58,17 +58,33 @@ while True:
 
 
 #setting up enemy
+#enemy1
 dave = Enemy('Dave', 'A smelly zombie!!')
-
-#dave.describe()
 dave.set_conversation('urrghhhh....murrhrhh..guuhhh..')
 
 dave.set_weakness('Hot iron')
 
+#enemy2
+karen = Enemy('Karen','A racist white women')
+
+karen.set_conversation('Go back to where you came from ')
+karen.set_weakness('Coke')
+
+
+#friend1
+micheal = Friend('Mike','A friendly fluffy dog')
+micheal.set_conversation("Hi, I am so happy to see you!")
+
+
+
+
+#dave.describe()
+
 #setting up enemy in a room    
 
 dining_room.set_character(dave)
-
+ballroom.set_character(karen)
+kitchen.set_character(micheal)
 
 current_room = dining_room
 
@@ -83,7 +99,7 @@ while current_room is not None:
     
     if inhabitant == None:
         print('\n')
-        print('No enemy in the room')
+        print('No enemy/friend in the room')
         
         command = input(' Which direction to go next:  ')
         
@@ -91,9 +107,12 @@ while current_room is not None:
         
     else:
         inhabitant.describe()
+        
         print('\n')
         
-        command = input(' What do you want to do: ')
+
+        
+        command = input('What do you want to do: ')
     
         if command.lower() in ['north','south','east','west','northeast','southwest']:
                 print('\n')
@@ -104,11 +123,33 @@ while current_room is not None:
                 inhabitant.talk()
         
         elif command.lower() == 'fight':
+            
+            if isinstance(inhabitant,Enemy) == True:
+                
                 print('\n')
                 weapon = input('Choose your weapon: ')
                 print('\n')
-                inhabitant.fight(weapon)
-
+                if inhabitant.fight(weapon) == True:                    
+                    continue
+                
+                else:                    
+                    print('GAME ENDED')
+                    break
+                
+            else:
+                print('You cannot fight ', inhabitant.name)
+                continue
+                
+        elif command.lower() == 'hug':
+            
+            if isinstance(inhabitant,Friend) == True:
+                inhabitant.hug()
+                continue
+            
+            else:
+                print('You cant hug ', inhabitant.name)
+                
+             
         else:
             break
         
