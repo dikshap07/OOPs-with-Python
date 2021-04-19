@@ -6,11 +6,17 @@ Created on Sun Apr 11 18:26:34 2021
 """
 class Room():
     
+    no_of_rooms = 0
+    
     def __init__(self,room_name):
         
         self.name = room_name
         self.linked_rooms = {}
         self.description = None
+        self.character = None
+        self.item = None
+        
+        Room.no_of_rooms += 1 
 
     def set_description(self,room_description):
         
@@ -32,6 +38,22 @@ class Room():
     def get_name(self):
         
         return self.name
+    
+    def set_character(self, character_name):
+        
+        self.character = character_name
+        
+    def get_character(self):
+        
+        return self.character
+    
+    def set_item(self,item_name):
+        
+        self.item = item_name
+    
+    def get_item(self):
+        
+        return self.item
     
     def link_room(self,room_to_link,direction):
         
